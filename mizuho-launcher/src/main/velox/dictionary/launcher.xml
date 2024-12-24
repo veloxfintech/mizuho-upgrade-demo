@@ -1,0 +1,16 @@
+<dictionary xmlns="http://www.veloxfintech.com">
+  <attr name="schema_name" value="Launcher"/>
+  <attr name="package_root" value="com.velox.launcher.api"/>
+
+  <screens>
+    <screen name="App1Launcher">
+    </screen>
+
+    <screen name="App2Launcher">
+    </screen>
+
+    <screen name="App3Launcher">
+      <control name="url" type="singlevalue" datatype="string"/>
+    </screen>
+  </screens>
+</dictionary>

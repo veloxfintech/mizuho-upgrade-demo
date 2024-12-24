@@ -1,0 +1,10 @@
+<dictionary xmlns="http://www.veloxfintech.com">
+    <attr name="schema_name" value="App1"/>
+    <attr name="package_root" value="com.velox.app2.api"/>
+
+    <screens>
+        <screen name="App2">
+
+        </screen>
+    </screens>
+</dictionary>
