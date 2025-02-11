@@ -4,13 +4,13 @@ launcher is the container application which embeds iframes of other 3 applicatio
 
 The webserver config of 4 applications as follows:
 
-launcher: http://localhost:6061/launcher
+Launcher: http://localhost:6061/launcher
 
-app1: http://localhost:6062/order 
+Order: http://localhost:6062/order 
 
-app2: http://localhost:6063/position 
+Position: http://localhost:6063/position 
 
-app3: http://localhost:6064/cookbook
+Custom Landing: http://localhost:6064/cookbook
 
 ![image](https://github.com/user-attachments/assets/a3473300-131a-48a1-8c7f-80614b8fc0f3)
 
