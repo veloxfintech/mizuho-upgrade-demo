@@ -12,11 +12,11 @@ app2: http://localhost:6063/position
 
 app3: http://localhost:6064/cookbook
 
-![image](https://github.com/user-attachments/assets/f6a76f24-7647-4d64-8570-91c4f0d346e8)
+![image](https://github.com/user-attachments/assets/a3473300-131a-48a1-8c7f-80614b8fc0f3)
 
 # Order
 
-For app1, it demonstrates the most basic setup.
+For Order, it demonstrates the most basic setup.
 
 **In launcher:**
 
@@ -28,7 +28,7 @@ OrderLauncherScreen.html
 </div>
 ```
 
-**In order application:**
+**In Order application:**
 
 Application.java
 
@@ -37,56 +37,20 @@ var root = ContextRoot.create("/order").withContentSecurityPolicy("frame-ancesto
 context.get(VeloxWebComponents.WebServerBuilder).addPort(6062).addContextRoot(root).start();
 ```
 
-(you can use ‘*’ to allow app1 to be embedded in any other applications, here I restrict it to only embedded by launcher)
+(you can use ‘*’ to allow Order to be embedded in any other applications, here I restrict it to only embedded by launcher)
 
-![image 1](https://github.com/user-attachments/assets/e854ec5a-1e96-49c2-a37d-01c4537690f1)
+# Position
 
-![image 2](https://github.com/user-attachments/assets/f1632812-ff5f-4885-82c6-5e0f69f603bf)
-
-# App2
-
-For app2, it demonstrates how to replace landing screen of App2 to actual application screen.
-
-**In launcher:**
-
-App2LauncherScreen.html
-
-```html
-<div class="App2LauncherScreen vx-screen gap-1">
-  <iframe class="vx-stretch" src="http://localhost:6063/app2"></iframe>
-</div>
-```
-
-**In app2:**
-
-Application.java
-
-```java
-var landingScreenProvider = new App2ScreenProvider("App2", "Velox", "fa-solid fa-desktop");
-var stateFactory = context.get(VeloxCoreComponents.SessionStateFactory);
-stateFactory.register(VeloxCoreComponents.LandingScreenProvider, state -> landingScreenProvider);
-...
-var root = ContextRoot.create("/app2").withContentSecurityPolicy("frame-ancestors", "http://localhost:6061");
-context.get(VeloxWebComponents.WebServerBuilder).addPort(6063).addContextRoot(root).start();
-```
-
-![image 3](https://github.com/user-attachments/assets/b2e3806b-8b35-437c-856d-4c38b5152f8c)
-
-
-<aside>❕This is one way to hide the app bar, since the app bar belongs to ClassicLandingScreen, and you override the landing screen with actual application screen. But this method only applies if you only have 1 screen in app2, since you can’t switch to other screens via launchpad.</aside>
-
-# App3
-
-For app3, it demonstrates how to use query parameters to load application screen.
+For Position, it demonstrates how to use query parameters to load application screen.
 
 For more details you can checkout [https://portal.veloxfintech.com/doc/velox-docs/v4.0.0/velox_documentation/cookbook/integration/clickable_link.html](https://portal.veloxfintech.com/doc/velox-docs/v4.0.0/velox_documentation/cookbook/integration/clickable_link.html)
 
 **In launcher:**
 
-App3LauncherScreen.html
+PositionLauncherScreen.html
 
 ```html
-<div class="App3LauncherScreen vx-screen gap-1">
+<div class="PositionLauncherScreen vx-screen gap-1">
   <iframe class="vx-stretch" :src="url.Value"></iframe>
 </div>
 ```
@@ -99,21 +63,21 @@ package com.velox.launcher;
 import com.aralis.vm.ClientNotifier;
 import com.aralis.vm.SessionState;
 import com.caelo.vm.workspace.WorkspaceScreenProvider;
-import com.velox.launcher.api.App3LauncherScreen;
+import com.velox.launcher.api.PositionLauncherScreen;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.regex.Pattern;
 
-public class App3LauncherScreenProvider extends WorkspaceScreenProvider<App3LauncherScreen> {
-    public App3LauncherScreenProvider(String caption, String group, String icon) {
-        super(App3LauncherScreen.class, caption, group, icon);
+public class PositionLauncherScreenProvider extends WorkspaceScreenProvider<PositionLauncherScreen> {
+    public PositionLauncherScreenProvider(String caption, String group, String icon) {
+        super(PositionLauncherScreen.class, caption, group, icon);
     }
 
     @Override
-    public App3LauncherScreen createScreen(SessionState state, ClientNotifier notifier) {
-        var screen = new App3LauncherScreen(state);
-        var query = encodeQuery("windowType=CHILD&provider=com.velox.app3.App3ScreenProvider");
-        screen.m_url.setValue("http://localhost:6064/app3/?" + query);
+    public PositionLauncherScreen createScreen(SessionState state, ClientNotifier notifier) {
+        var screen = new PositionLauncherScreen(state);
+        var query = encodeQuery("windowType=CHILD&provider=com.velox.position.PositionScreenProvider");
+        screen.m_url.setValue("http://localhost:6063/position/?" + query);
         return screen;
     }
 
@@ -127,19 +91,19 @@ public class App3LauncherScreenProvider extends WorkspaceScreenProvider<App3Laun
 }
 ```
 
-**In app3:**
+**In Position application:**
 
-App3ScreenProvider.java
+PositionScreenProvider.java
 
 ```java
-package com.velox.app3;
+package com.velox.position;
 
 import com.aralis.vm.ClientNotifier;
 import com.aralis.vm.ScreenProvider;
 import com.aralis.vm.SessionState;
-import com.velox.app3.api.App3Screen;
+import com.velox.app3.api.PositionScreen;
 
-public class App3ScreenProvider implements ScreenProvider<App3Screen> {
+public class PositionScreenProvider implements ScreenProvider<PositionScreen> {
     @Override
     public String group() {
         return "Velox";
@@ -147,7 +111,7 @@ public class App3ScreenProvider implements ScreenProvider<App3Screen> {
 
     @Override
     public String caption() {
-        return name();
+        return "Position";
     }
 
     @Override
@@ -157,17 +121,18 @@ public class App3ScreenProvider implements ScreenProvider<App3Screen> {
 
     @Override
     public String name() {
-        return App3ScreenProvider.class.getName();
+        return PositionScreenProvider.class.getName();
     }
 
     @Override
     public void create(SessionState state, ClientNotifier notifier) {
-        notifier.created(new App3Screen(state));
+        notifier.created(new PositionScreen(state));
     }
 }
 ```
 
-![image 4](https://github.com/user-attachments/assets/81d5b091-5875-4db1-9f6f-6c4f57c21bc9)
+<aside>❕This is one way to hide app bar. And you can open different screens by setting different provider parameters on url.</aside>
 
+# Custom Landing
 
-<aside>❕This is another way to hide app bar. And you can open different screens by setting different provider parameters on url.</aside>
+For Custom Landing, it demonstrates how to set custom landing screen.
