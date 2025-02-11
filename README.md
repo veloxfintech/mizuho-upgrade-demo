@@ -136,3 +136,6 @@ public class PositionScreenProvider implements ScreenProvider<PositionScreen> {
 # Custom Landing
 
 For Custom Landing, it demonstrates how to set custom landing screen.
+
+![image](https://github.com/user-attachments/assets/19a3908f-46ce-4c60-b05f-ff33f0a350ab)
+
