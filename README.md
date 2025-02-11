@@ -1,4 +1,4 @@
-In this demo, I prepared 4 separate projects: launcher, app1, app2 and app3.
+In this demo, I prepared 4 separate projects: launcher, order, position and custom_landing.
 
 launcher is the container application which embeds iframes of other 3 applications.
 
@@ -6,34 +6,34 @@ The webserver config of 4 applications as follows:
 
 launcher: http://localhost:6061/launcher
 
-app1: http://localhost:6062/app1 
+app1: http://localhost:6062/order 
 
-app2: http://localhost:6063/app2 
+app2: http://localhost:6063/position 
 
-app3: http://localhost:6064/app3
+app3: http://localhost:6064/cookbook
 
 ![image](https://github.com/user-attachments/assets/f6a76f24-7647-4d64-8570-91c4f0d346e8)
 
-# App1
+# Order
 
 For app1, it demonstrates the most basic setup.
 
 **In launcher:**
 
-App1LauncherScreen.html
+OrderLauncherScreen.html
 
 ```html
-<div class="App1LauncherScreen vx-screen gap-1">
-  <iframe class="vx-stretch" src="http://localhost:6062/app1"></iframe>
+<div class="OrderLauncherScreen vx-screen gap-1">
+  <iframe class="vx-stretch" src="http://localhost:6062/order"></iframe>
 </div>
 ```
 
-**In app1:**
+**In order application:**
 
 Application.java
 
 ```java
-var root = ContextRoot.create("/app1").withContentSecurityPolicy("frame-ancestors", "http://localhost:6061");
+var root = ContextRoot.create("/order").withContentSecurityPolicy("frame-ancestors", "http://localhost:6061");
 context.get(VeloxWebComponents.WebServerBuilder).addPort(6062).addContextRoot(root).start();
 ```
 

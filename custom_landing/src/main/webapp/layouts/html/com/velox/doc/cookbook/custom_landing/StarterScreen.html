@@ -1,0 +1,26 @@
+<div class="StarterScreen vx-screen gap-1">
+  <div class="flex-row gap-1">
+    <div class="labeled-input">
+      <label>First Name</label>
+      <vx-input :vm="firstName"></vx-input>
+    </div>
+    <div class="labeled-input">
+      <label>Last Name</label>
+      <vx-input :vm="lastName"></vx-input>
+    </div>
+    <div class="labeled-input">
+      <label>Age</label>
+      <vx-input :vm="age"></vx-input>
+    </div>
+    <div class="labeled-input">
+      <label>Email</label>
+      <vx-input :vm="email" type="email"></vx-input>
+    </div>
+    <div class="labeled-input">
+      <label>Region</label>
+      <vx-select :vm="region"></vx-select>
+    </div>
+    <vx-action :vm="addUser">Add User</vx-action>
+  </div>
+  <vx-data-grid :vm="users" class="flex-1"></vx-data-grid>
+</div>

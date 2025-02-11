@@ -1,0 +1,134 @@
+<dictionary>
+  <attr name="schema_name" value="CustomLanding"/>
+  <attr name="package_root" value="com.velox.doc.cookbook.custom_landing"/>
+
+  <fieldTypes>
+    <field name="email" type="string"/>
+    <field name="firstName" type="string"/>
+    <field name="lastName" type="string"/>
+    <field name="region" type="string"/>
+    <field name="age" type="int"/>
+
+    <field name="name" type="string"/>
+    <field name="last" type="double"/>
+    <field name="high" type="double"/>
+    <field name="low" type="double"/>
+    <field name="change" type="double"/>
+    <field name="changePercent" type="double"/>
+    <field name="time" type="Instant"/>
+
+    <field name="date" type="date"/>
+    <field name="price" type="double"/>
+    <field name="open" type="double"/>
+  </fieldTypes>
+
+  <tables>
+    <table name="User">
+      <field name="email" primaryKey="true"/>
+      <field name="firstName"/>
+      <field name="lastName"/>
+      <field name="age"/>
+      <field name="region"/>
+    </table>
+
+    <table name="MarketData">
+      <field name="name" primaryKey="true"/>
+      <field name="last"/>
+      <field name="high"/>
+      <field name="low"/>
+      <field name="change"/>
+      <field name="changePercent"/>
+      <field name="time"/>
+    </table>
+
+    <table name="HistoryData">
+      <field name="date" primaryKey="true"/>
+      <field name="price"/>
+      <field name="open"/>
+      <field name="high"/>
+      <field name="low"/>
+      <field name="changePercent"/>
+    </table>
+  </tables>
+
+  <views>
+    <view name="User" table="User">
+      <column name="firstName" source="firstName" caption="First Name"/>
+      <column name="lastName" source="lastName" caption="Last Name"/>
+      <column name="age" source="age" caption="Age"/>
+      <column name="region" source="region" caption="Region"/>
+      <column name="email" source="email" caption="Email"/>
+    </view>
+
+    <view name="MarketData">
+      <column name="name" source="name" caption="Name"/>
+      <column name="last" source="last" caption="Last"/>
+      <column name="high" source="high" caption="High"/>
+      <column name="low" source="low" caption="Low"/>
+      <column name="change" source="change" caption="Chg."/>
+      <column name="changePercent" source="changePercent" caption="Chg.%"/>
+      <column name="time" source="time" caption="Time" width="150"/>
+    </view>
+
+    <view name="Analytics" table="MarketData">
+      <column name="name" source="name" caption="Name"/>
+      <column name="last" source="last" caption="Last"/>
+      <column name="change" source="change" caption="Chg."/>
+    </view>
+
+    <view name="HistoryData">
+      <column name="date" source="date" caption="Date"/>
+      <column name="price" source="price" caption="Price" aggregation="pickone"/>
+      <column name="open" source="open" caption="Open"/>
+      <column name="high" source="high" caption="High" aggregation="pickone"/>
+      <column name="low" source="low" caption="Low" aggregation="pickone"/>
+      <column name="changePercent" source="changePercent" caption="Chg.%"/>
+    </view>
+  </views>
+
+  <screens>
+    <screen name="Landing">
+      <control name="launchpadVisible" type="singlevalue" datatype="Boolean"/>
+      <control name="infoButton" type="action"/>
+    </screen>
+
+    <screen name="Launchpad">
+      <control name="items" type="singlevalue" datatype="Integer"/>
+      <control name="showFavorites" type="singlevalue" datatype="Boolean"/>
+    </screen>
+
+    <screen name="LaunchpadItem">
+      <control name="name" type="singlevalue" datatype="String"/>
+      <control name="group" type="singlevalue" datatype="String"/>
+      <control name="caption" type="singlevalue" datatype="String"/>
+      <control name="icon" type="singlevalue" datatype="String"/>
+      <control name="imageUrl" type="singlevalue" datatype="String"/>
+      <control name="open" type="action"/>
+      <control name="isFavorite" type="singlevalue" datatype="Boolean"/>
+    </screen>
+
+    <!-- tag::DefineDashboardScreen[] -->
+    <screen name="Dashboard">
+      <control name="analytics" type="datagrid" datatype="MarketData" keytype="?" viewname="Analytics"/>
+      <control name="market" type="datagrid" datatype="MarketData" keytype="?" viewname="MarketData"/>
+      <control name="history" type="datagrid" datatype="HistoryData" keytype="?" viewname="HistoryData"/>
+    </screen>
+    <!-- end::DefineDashboardScreen[] -->
+
+    <screen name="Starter">
+      <control name="firstName" type="singlevalue" datatype="string"/>
+      <control name="lastName" type="singlevalue" datatype="string"/>
+      <control name="region" type="singlevalue" datatype="string"/>
+      <control name="email" type="singlevalue" datatype="string"/>
+      <control name="age" type="singlevalue" datatype="int"/>
+      <control name="addUser" type="action"/>
+      <control name="users" type="datagrid" datatype="User" keytype="?" viewname="User"/>
+    </screen>
+
+    <screen name="Alpha"/>
+    <screen name="Beta"/>
+    <screen name="Gamma"/>
+    <screen name="Delta"/>
+    <screen name="Epsilon"/>
+  </screens>
+</dictionary>

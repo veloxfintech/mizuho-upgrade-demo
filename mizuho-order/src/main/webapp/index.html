@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Mizuho Order</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  {{{ veloxLinkTags }}}
+  <link rel="stylesheet" href="app.css?nonce={{nonce}}">
+</head>
+
+<body>
+<h1 style="position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;">
+  Loading...
+</h1>
+
+<div id="app" style="height: 100vh; width: 100vw">
+  <vx-app>
+    <template #login>
+      <vx-login logo="logo/logo.png"></vx-login>
+    </template>
+  </vx-app>
+</div>
+
+<script>
+  // this is for OIDC support
+  window.velox = {
+    authType: "{{authType}}",
+    userName: "{{userName}}",
+    code: "{{code}}"
+  };
+
+  window.onload = () => {
+    Vue.createApp({}).use(VeloxVue).mount("#app");
+  }
+</script>
+{{{ veloxScriptTags }}}
+</body>
+
+</html>

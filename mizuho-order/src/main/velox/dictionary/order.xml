@@ -1,0 +1,90 @@
+<dictionary xmlns="http://www.veloxfintech.com">
+    <attr name="schema_name" value="Order"/>
+    <attr name="package_root" value="com.velox.order.api"/>
+
+    <tables>
+        <table name="Order">
+            <field name="orderId" type="string" primaryKey="true"/>
+            <field name="orderDate" type="date"/>
+            <field name="basketName" type="string"/>
+            <field name="productId" type="string"/>
+            <field name="side" type="string"/>
+            <field name="orderQty" type="int"/>
+            <field name="execQty" type="int"/>
+            <field name="avgPrice" type="double"/>
+            <field name="execNotional" type="double"/>
+            <field name="account" type="string"/>
+            <field name="sector" type="string"/>
+            <field name="noteA" type="string"/>
+            <field name="noteB" type="string"/>
+            <field name="noteC" type="string"/>
+            <field name="clientInstruction" type="string"/>
+            <field name="parentOrder" type="string"/>
+            <field name="adv" type="long"/>
+            <field name="fxRate" type="double"/>
+            <field name="pricingSymbol" type="string"/>
+            <field name="country" type="string"/>
+            <field name="exchange" type="string"/>
+            <field name="prevClose" type="double"/>
+            <field name="volume" type="long"/>
+            <field name="isHalted" type="boolean"/>
+            <field name="bidSize" type="int"/>
+            <field name="vwap" type="double"/>
+            <field name="high" type="double"/>
+            <field name="lastSize" type="int"/>
+            <field name="low" type="double"/>
+            <field name="ask" type="double"/>
+            <field name="bid" type="double"/>
+            <field name="dataSource" type="string"/>
+            <field name="close" type="double"/>
+            <field name="askSize" type="int"/>
+            <field name="open" type="double"/>
+        </table>
+    </tables>
+
+    <views>
+        <view name="Order">
+            <column name="orderId" source="orderId"/>
+            <column name="orderDate" source="orderDate"/>
+            <column name="basketName" source="basketName"/>
+            <column name="productId" source="productId"/>
+            <column name="side" source="side"/>
+            <column name="orderQty" source="orderQty"/>
+            <column name="execQty" source="execQty"/>
+            <column name="avgPrice" source="avgPrice"/>
+            <column name="execNotional" source="execNotional"/>
+            <column name="account" source="account"/>
+            <column name="sector" source="sector"/>
+            <column name="noteA" source="noteA"/>
+            <column name="noteB" source="noteB"/>
+            <column name="noteC" source="noteC"/>
+            <column name="clientInstruction" source="clientInstruction"/>
+            <column name="parentOrder" source="parentOrder"/>
+            <column name="adv" source="adv"/>
+            <column name="fxRate" source="fxRate"/>
+            <column name="pricingSymbol" source="pricingSymbol"/>
+            <column name="country" source="country"/>
+            <column name="exchange" source="exchange"/>
+            <column name="prevClose" source="prevClose"/>
+            <column name="volume" source="volume"/>
+            <column name="isHalted" source="isHalted"/>
+            <column name="bidSize" source="bidSize"/>
+            <column name="vwap" source="vwap"/>
+            <column name="high" source="high"/>
+            <column name="lastSize" source="lastSize"/>
+            <column name="low" source="low"/>
+            <column name="ask" source="ask"/>
+            <column name="bid" source="bid"/>
+            <column name="dataSource" source="dataSource"/>
+            <column name="close" source="close"/>
+            <column name="askSize" source="askSize"/>
+            <column name="open" source="open"/>
+        </view>
+    </views>
+
+    <screens>
+        <screen name="Order">
+            <control name="orders" type="datagrid" datatype="Order" keytype="?" viewname="Order"/>
+        </screen>
+    </screens>
+</dictionary>

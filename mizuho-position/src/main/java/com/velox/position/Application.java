@@ -1,4 +1,4 @@
-package com.velox.launcher;
+package com.velox.position;
 
 import com.aralis.tools.support.SupportViewerScreenProvider;
 import com.aralis.vm.ScreenProviderFactory;
@@ -9,6 +9,7 @@ import com.caelo.application.VeloxCoreComponents;
 import com.caelo.util.logging.Loggers;
 import com.velox.app.api.InstanceInfoBuilder;
 import com.velox.config.VeloxConfigModule;
+import com.velox.position.api.Position;
 import com.velox.tools.VeloxToolComponents;
 import com.velox.tools.VeloxToolModule;
 import com.velox.tools.ui.UserSettingScreenProvider;
@@ -35,24 +36,25 @@ public class Application {
           .register(VeloxCoreComponents.InstanceInfo, ctx -> instance)
           .register(VeloxCoreComponents.ScreenProviderFactory, Application::createScreenProviderFactory)
           .register(VeloxWebComponents.Vertx, Application::createVertx)
+          .register(PositionInjector.class, Application::createPositionInjector, true)
           .get();
 
         var env = context.get(VeloxCoreComponents.VeloxEnvironment);
 
-        var root = ContextRoot.create("/launcher");
+        var root =
+          ContextRoot.create("/position").withContentSecurityPolicy("frame-ancestors", "http://localhost:6061");
         if (env.isDevelopment()) {
             root.addWebRoot("build/extracted-included-webapp/src/main/webapp");
         }
 
-        context.get(VeloxWebComponents.WebServerBuilder).addPort(6061).addContextRoot(root).start();
+        context.get(VeloxWebComponents.WebServerBuilder).addPort(6063).addContextRoot(root).start();
 
         s_log.info("started instance {}, environment {}", instance.instanceId(), env.mode());
     }
 
     private static ScreenProviderFactory createScreenProviderFactory(ApplicationContext ctx) {
-        return new SimpleScreenProviderFactory(new OrderLauncherScreenProvider("Order", "Mizuho", "fa-solid fa-desktop"),
-          new PositionLauncherScreenProvider("Position", "Mizuho", "fa-solid fa-desktop"),
-          new CustomLandingLauncherScreenProvider("Custom Landing", "Mizuho", "fa-solid fa-desktop"),
+        return new SimpleScreenProviderFactory(
+          new PositionScreenProvider(),
           new SupportViewerScreenProvider(ctx.get(VeloxToolComponents.CachePublisherTracker),
             "Support Viewer",
             "Support",
@@ -69,5 +71,10 @@ public class Application {
         } else {
             return Vertx.vertx();
         }
+    }
+
+    private static PositionInjector createPositionInjector(ApplicationContext ctx) {
+        var dc = ctx.get(VeloxCoreComponents.DataContextAccessor);
+        return new PositionInjector(dc.getPublisher(Position.class), "position.csv");
     }
 }

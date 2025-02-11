@@ -3,14 +3,14 @@
   <attr name="package_root" value="com.velox.launcher.api"/>
 
   <screens>
-    <screen name="App1Launcher">
+    <screen name="OrderLauncher">
     </screen>
 
-    <screen name="App2Launcher">
-    </screen>
-
-    <screen name="App3Launcher">
+    <screen name="PositionLauncher">
       <control name="url" type="singlevalue" datatype="string"/>
+    </screen>
+
+    <screen name="CustomLandingLauncher">
     </screen>
   </screens>
 </dictionary>

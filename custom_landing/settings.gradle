@@ -1,0 +1,31 @@
+// Since Gradle 6+, pluginManagement {} block has been introduced as a replacement for
+// buildscript block. pluginManagement {} block may only appear in either the settings.gradle
+// file where it must be the first block in the file, or in an initialization script.
+// pluginManagement {} gives a few advantages over the buildscript syntax by providing
+// better control over plugin resolution strategies, however to us the most important
+// thing is that this is the only syntax that can include velox-gradle-plugin in a composite
+// build properly. By properly, it means that the locally checked out velox-gradle-plugin
+// needs to apply to all projects using the plugin in the composite build, not just
+// the root project
+
+pluginManagement {
+    // uncomment below if you want to include velox-gradle-plugin in composite build
+//     includeBuild '../velox-gradle-plugin'
+//     includeBuild '../velox-release-plugin'
+
+    // defines where to search for plugins
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+        maven {
+            url velox_repo_url
+
+            credentials {
+                username velox_repo_user
+                password velox_repo_password
+            }
+        }
+    }
+}
+
+rootProject.name = 'custom_landing'

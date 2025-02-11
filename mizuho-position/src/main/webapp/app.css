@@ -1,0 +1,7 @@
+* {
+    backdrop-filter: hue-rotate(180deg);
+}
+
+.vx-login {
+    background-color: #d15274;
+}

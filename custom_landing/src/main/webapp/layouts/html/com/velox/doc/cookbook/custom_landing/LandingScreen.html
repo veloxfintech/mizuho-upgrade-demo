@@ -1,0 +1,28 @@
+<div class="LandingScreen vx-screen" style="padding: 0">
+  <vx-portal for="appbar">
+    <template #default="{ vm }">
+      <vx-app-bar :vm="vm">
+        <div class="vx-app-bar-item" style="order: -1; padding: 0">
+          <img src="logo/logo.svg" alt="company logo" style="height: 100%">
+        </div>
+        <a class="vx-app-bar-item action flex-row gap"
+           href="https://portal.veloxfintech.com/doc/velox-docs/v3.1.0/index.html">
+          <span class="material-icons-outlined">open_in_new</span>
+          <span>Documentation</span>
+        </a>
+        <vx-action :vm="infoButton" class="vx-app-bar-item" style="height: 100%;">
+          Info
+        </vx-action>
+      </vx-app-bar>
+    </template>
+  </vx-portal>
+  <!-- tag::LandingScreenlayout[] -->
+  <vx-portal for="launchpad" v-if="launchpadVisible.Value === 'true'"></vx-portal>
+  <div class="flex-col flex-1" style="position: relative">
+    <vx-portal for="dashboard"
+               class="vx-stretch"
+               v-if="$vx.store.stacks.top === undefined"></vx-portal>
+    <vx-workspace v-else></vx-workspace>
+  </div>
+  <!-- end::LandingScreenlayout[] -->
+</div>

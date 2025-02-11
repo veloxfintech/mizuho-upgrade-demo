@@ -1,0 +1,46 @@
+buildscript {
+    repositories {
+        gradlePluginPortal()
+        maven {
+            url velox_repo_url
+
+            credentials {
+                username velox_repo_user
+                password velox_repo_password
+            }
+        }
+    }
+
+    dependencies {
+        classpath "com.velox:velox-gradle-plugin:${plugin_ver}+"
+    }
+}
+
+plugins {
+    id 'java'
+    id 'application'
+    id 'idea'
+}
+
+apply plugin: 'com.velox.velox-gradle-plugin'
+
+repositories {
+    mavenCentral()
+    maven {
+        url velox_repo_url
+
+        credentials {
+            username velox_repo_user
+            password velox_repo_password
+        }
+    }
+}
+
+dependencies {
+    implementation "com.velox:velox-framework:4.1.0+"
+    runtimeOnly 'ch.qos.logback:logback-classic:1.5.6'
+}
+
+application {
+    mainClass.set('com.velox.doc.cookbook.custom_landing.Main')
+}

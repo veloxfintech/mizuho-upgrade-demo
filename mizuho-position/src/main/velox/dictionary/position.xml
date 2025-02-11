@@ -1,0 +1,82 @@
+<dictionary xmlns="http://www.veloxfintech.com">
+    <attr name="schema_name" value="Position"/>
+    <attr name="package_root" value="com.velox.position.api"/>
+
+    <tables>
+        <table name="Position">
+            <field name="accountId" type="string" primaryKey="true"/>
+            <field name="productId" type="string" primaryKey="true"/>
+            <field name="ticker" type="string"/>
+            <field name="ric" type="string"/>
+            <field name="description" type="string"/>
+            <field name="position" type="int"/>
+            <field name="currency" type="string"/>
+            <field name="delta" type="int"/>
+            <field name="fx" type="double"/>
+            <field name="last" type="double"/>
+            <field name="bid" type="double"/>
+            <field name="ask" type="double"/>
+            <field name="realizedPnL" type="double"/>
+            <field name="boughtQty" type="int"/>
+            <field name="boughtPrice" type="double"/>
+            <field name="soldQty" type="int"/>
+            <field name="soldPrice" type="double"/>
+            <field name="unrealizedPnL" type="double"/>
+            <field name="totalPnL" type="double"/>
+            <field name="costBasis" type="double"/>
+            <field name="lastTradePnL" type="double"/>
+            <field name="notional" type="double"/>
+            <field name="fxAdjNotional" type="double"/>
+            <field name="exchange" type="string"/>
+            <field name="sector" type="string"/>
+            <field name="country" type="string"/>
+            <field name="lastTradeQty" type="int"/>
+            <field name="lastTradeSide" type="string"/>
+            <field name="lastTradePrice" type="double"/>
+            <field name="productType" type="string"/>
+            <field name="multiplier" type="double"/>
+        </table>
+    </tables>
+
+    <views>
+        <view name="Position">
+            <column name="accountId" source="accountId"/>
+            <column name="productId" source="productId"/>
+            <column name="ticker" source="ticker"/>
+            <column name="ric" source="ric"/>
+            <column name="description" source="description"/>
+            <column name="position" source="position"/>
+            <column name="currency" source="currency"/>
+            <column name="delta" source="delta"/>
+            <column name="fx" source="fx"/>
+            <column name="last" source="last"/>
+            <column name="bid" source="bid"/>
+            <column name="ask" source="ask"/>
+            <column name="realizedPnL" source="realizedPnL"/>
+            <column name="boughtQty" source="boughtQty"/>
+            <column name="boughtPrice" source="boughtPrice"/>
+            <column name="soldQty" source="soldQty"/>
+            <column name="soldPrice" source="soldPrice"/>
+            <column name="unrealizedPnL" source="unrealizedPnL"/>
+            <column name="totalPnL" source="totalPnL"/>
+            <column name="costBasis" source="costBasis"/>
+            <column name="lastTradePnL" source="lastTradePnL"/>
+            <column name="notional" source="notional"/>
+            <column name="fxAdjNotional" source="fxAdjNotional"/>
+            <column name="exchange" source="exchange"/>
+            <column name="sector" source="sector"/>
+            <column name="country" source="country"/>
+            <column name="lastTradeQty" source="lastTradeQty"/>
+            <column name="lastTradeSide" source="lastTradeSide"/>
+            <column name="lastTradePrice" source="lastTradePrice"/>
+            <column name="productType" source="productType"/>
+            <column name="multiplier" source="multiplier"/>
+        </view>
+    </views>
+
+    <screens>
+        <screen name="Position">
+            <control name="positions" type="datagrid" datatype="Position" keytype="?" viewname="Position"/>
+        </screen>
+    </screens>
+</dictionary>
