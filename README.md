@@ -55,7 +55,7 @@ PositionLauncherScreen.html
 </div>
 ```
 
-App3LauncherScreenProvider.java
+CustomLandingLauncherScreenProvider.java
 
 ```java
 package com.velox.launcher;
@@ -101,7 +101,7 @@ package com.velox.position;
 import com.aralis.vm.ClientNotifier;
 import com.aralis.vm.ScreenProvider;
 import com.aralis.vm.SessionState;
-import com.velox.app3.api.PositionScreen;
+import com.velox.position.api.PositionScreen;
 
 public class PositionScreenProvider implements ScreenProvider<PositionScreen> {
     @Override
